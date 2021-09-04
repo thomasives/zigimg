@@ -6,7 +6,7 @@ This is a work in progress library to create, process, read and write different 
 
 ## Install & Build
 
-This project assume current Zig master (0.7.0+a1fb10b76).
+This project assume current Zig master. 
 
 How to add to your project:
 1. Clone this repository or add as a submodule
@@ -48,6 +48,9 @@ zig build test
 * 24-bit RGB
 * 32 RGBA
 * Doesn't support any compression
+
+### GIF - Graphics Interchange Format
+* Support GIF89a only
 
 ### PBM - Portable Bitmap format
 
