@@ -39,7 +39,7 @@ pub const ImageInfo = struct {
 
 /// Format-independant image
 pub const Image = struct {
-    allocator: *Allocator = undefined,
+    allocator: Allocator = undefined,
     width: usize = 0,
     height: usize = 0,
     pixels: ?ColorStorage = null,
@@ -73,7 +73,7 @@ pub const Image = struct {
         break :blk result[0..index];
     };
 
-    pub fn init(allocator: *Allocator) Self {
+    pub fn init(allocator: Allocator) Self {
         return Self{
             .allocator = allocator,
         };
@@ -107,7 +107,7 @@ pub const Image = struct {
         return result;
     }
 
-    pub fn fromMemory(allocator: *Allocator, buffer: []const u8) !Self {
+    pub fn fromMemory(allocator: Allocator, buffer: []const u8) !Self {
         var result = init(allocator);
 
         var stream_source = io.StreamSource{ .const_buffer = io.fixedBufferStream(buffer) };
@@ -203,7 +203,7 @@ pub const Image = struct {
         return color.ColorStorageIterator.initNull();
     }
 
-    fn internalRead(self: *Self, allocator: *Allocator, reader: ImageReader, seek_stream: ImageSeekStream) !void {
+    fn internalRead(self: *Self, allocator: Allocator, reader: ImageReader, seek_stream: ImageSeekStream) !void {
         var format_interface = try findImageInterfaceFromStream(reader, seek_stream);
         self.image_format = format_interface.format();
 
